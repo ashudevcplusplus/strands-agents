@@ -2,11 +2,9 @@ from __future__ import annotations
 
 import json
 import os
-from typing import Optional
 
 from strands import Agent, tool
 from strands.models.ollama import OllamaModel
-
 
 GLOSSARY_FILE = os.path.join(os.path.dirname(__file__), "cs_glossary.json")
 
@@ -15,7 +13,7 @@ def _load_glossary() -> dict:
     if not os.path.exists(GLOSSARY_FILE):
         with open(GLOSSARY_FILE, "w", encoding="utf-8") as f:
             json.dump({}, f)
-    with open(GLOSSARY_FILE, "r", encoding="utf-8") as f:
+    with open(GLOSSARY_FILE, encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -25,7 +23,7 @@ def _save_glossary(glossary: dict) -> None:
 
 
 @tool
-def cs_glossary(action: str, term: Optional[str] = None, definition: Optional[str] = None) -> str:
+def cs_glossary(action: str, term: str | None = None, definition: str | None = None) -> str:
     """Manage a glossary of CS terms. Actions: lookup, add, update, list.
 
     Args:
@@ -72,7 +70,8 @@ AGENT_PROMPT = (
 
 
 def main() -> None:
-    ollama_model = OllamaModel(host="http://localhost:11434", model_id="llama3.2")
+    model_tag = os.getenv("OLLAMA_MODEL", "qwen3:8b")
+    ollama_model = OllamaModel(host="http://localhost:11434", model_id=model_tag)
     agent = Agent(model=ollama_model, system_prompt=AGENT_PROMPT, tools=[cs_glossary])
 
     print("=== Add term ===")
@@ -87,4 +86,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

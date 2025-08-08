@@ -12,6 +12,13 @@ license = { text = "MIT" }
 authors = [{ name = "Ashutosh Gupta" }]
 dependencies = []
 
+[project.optional-dependencies]
+# Development-only tools for formatting and linting
+dev = [
+    "ruff>=0.5",
+    "pre-commit>=3.7",
+]
+
 [project.urls]
 Homepage = "https://strandsagents.com/latest/documentation/docs/"
 Repository = "https://github.com/strands-agents/sdk-python"
@@ -26,4 +33,42 @@ package-dir = {"" = "src"}
 where = ["src"]
 include = ["strands_agents*"]
 exclude = []
+
+
+# -----------------------------
+# Tooling configuration
+# -----------------------------
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+exclude = [
+    ".git",
+    ".venv",
+    "build",
+    "dist",
+    ".mypy_cache",
+    ".ruff_cache",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort (import sorting)
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # allow unused imports in package __init__
+
+[tool.ruff.lint.isort]
+known-first-party = ["strands_agents"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+skip-magic-trailing-comma = false
 

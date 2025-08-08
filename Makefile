@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help startover clean clean-caches clean-build clean-logs
+.PHONY: help startover clean clean-caches clean-build clean-logs format lint lint-fix hooks-install hooks-run
 
 help:
 	@echo "Available targets:"
@@ -36,4 +36,27 @@ clean: clean-caches clean-build
 
 startover: clean clean-logs
 	@echo "Startover complete."
+
+# -----------------------------
+# Formatting & Linting
+# -----------------------------
+format:
+	@echo "Running ruff formatter..."
+	ruff format .
+
+lint:
+	@echo "Running ruff lint checks..."
+	ruff check .
+
+lint-fix:
+	@echo "Running ruff with auto-fix..."
+	ruff check --fix .
+
+hooks-install:
+	@echo "Installing pre-commit hooks..."
+	pre-commit install
+
+hooks-run:
+	@echo "Running pre-commit on all files..."
+	pre-commit run --all-files
 
