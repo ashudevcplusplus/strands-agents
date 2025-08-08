@@ -5,70 +5,18 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "strands-agents-local"
 version = "0.1.0"
-description = "Strands Agents - Python package for agents and integrations"
+description = "Local workspace for Strands Agents examples"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
 authors = [{ name = "Ashutosh Gupta" }]
-dependencies = []
-
-[project.optional-dependencies]
-# Development-only tools for formatting and linting
-dev = [
-    "ruff>=0.5",
-    "pre-commit>=3.7",
+dependencies = [
+  "strands-agents==1.3.0",
+  "strands-agents-tools==0.2.3",
+  "mcp==1.12.4",
 ]
 
-[project.urls]
-Homepage = "https://strandsagents.com/latest/documentation/docs/"
-Repository = "https://github.com/strands-agents/sdk-python"
-
-[project.scripts]
-strands-agents-local = "strands_agents.__main__:main"
-
-[tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["strands_agents*"]
-exclude = []
-
-
-# -----------------------------
-# Tooling configuration
-# -----------------------------
-[tool.ruff]
-target-version = "py310"
-line-length = 100
-exclude = [
-    ".git",
-    ".venv",
-    "build",
-    "dist",
-    ".mypy_cache",
-    ".ruff_cache",
-]
-
-[tool.ruff.lint]
-select = [
-    "E",   # pycodestyle errors
-    "F",   # pyflakes
-    "I",   # isort (import sorting)
-    "B",   # flake8-bugbear
-    "UP",  # pyupgrade
-]
-ignore = []
-
-[tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]  # allow unused imports in package __init__
-
-[tool.ruff.lint.isort]
-known-first-party = ["strands_agents"]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-line-ending = "auto"
-skip-magic-trailing-comma = false
+[tool.uv]
+# If you use uv later, this keeps venv in .venv
+managed = true
+python-preference = "only-system"
 

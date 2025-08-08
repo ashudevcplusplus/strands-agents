@@ -182,16 +182,6 @@ def _example_orders() -> list[dict[str, Any]]:
 
 
 def main() -> None:
-    if os.getenv("NO_LLM") == "1":
-        # Deterministic fallback: call tools directly, no model required
-        print("=== Business Rules Agent Demo (NO_LLM mode) ===")
-        for order in _example_orders():
-            print(f"\n-- {order['id']} --")
-            decision = evaluate_order_rules(json.dumps(order, ensure_ascii=False))
-            print(decision)
-            print(log_decision(order["id"], decision))
-        return
-
     model = build_model()
     agent = build_business_rules_agent(model)
 

@@ -1,13 +1,24 @@
-## Strands Agents (Local)
+## Strands Agents — Local Examples
 
-Minimal local package for experimenting with Strands Agents examples.
+This repo contains local examples for Strands Agents. Choose your OS guide to get started:
 
-### Command-only quickstarts
-- Windows (PowerShell): see `README.windows.md`
-- macOS (Apple Silicon): see `README.macos.md`
+- See Windows setup: `README.windows.md`
+- See macOS setup: `README.macos.md`
 
-### Project info
-- Package: `strands-agents-local`
-- Module entry point: `python -m strands_agents`
-- License: MIT
-- Docs: `https://strandsagents.com/latest/documentation/docs/`
+### Quick Start (once dependencies are installed)
+
+Default model is `qwen3:8b` via Ollama at `http://localhost:11434`. You can override with the `OLLAMA_MODEL` env var.
+
+```bash
+# macOS/Linux
+export OLLAMA_MODEL="qwen3:8b"
+python examples/python/business_rules_agent.py
+
+# Windows (PowerShell)
+$env:OLLAMA_MODEL = "qwen3:8b"
+python examples\python\business_rules_agent.py
+```
+
+Logs are written under `runlogs/business_rules/`.
+
+
