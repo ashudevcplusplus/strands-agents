@@ -1,0 +1,14 @@
+# Python only
+__pycache__/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+.build/
+dist/
+node_modules/
+.mypy_cache/
+.pytest_cache/
+.DS_Store
+.eggs/
+*.egg-info/

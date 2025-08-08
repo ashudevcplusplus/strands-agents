@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "strands-agents-local"
+version = "0.1.0"
+description = "Strands Agents - Python package for agents and integrations"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Ashutosh Gupta" }]
+dependencies = []
+
+[project.urls]
+Homepage = "https://strandsagents.com/latest/documentation/docs/"
+Repository = "https://github.com/strands-agents/sdk-python"
+
+[project.scripts]
+strands-agents-local = "strands_agents.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["strands_agents*"]
+exclude = []
+
